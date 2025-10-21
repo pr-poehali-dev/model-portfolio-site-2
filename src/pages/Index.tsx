@@ -149,8 +149,8 @@ const Index = () => {
     pdf.text('Professional Model & Fashion Artist', pageWidth / 2, 30, { align: 'center' });
     
     pdf.setFontSize(10);
-    pdf.text('Email: contact@portfolio.com', pageWidth / 2, 40, { align: 'center' });
-    pdf.text('Phone: +1 (234) 567-890', pageWidth / 2, 45, { align: 'center' });
+    pdf.text('Email: vz7ya@mail.ru', pageWidth / 2, 40, { align: 'center' });
+    pdf.text('Phone: +7 (909) 586-56-37', pageWidth / 2, 45, { align: 'center' });
     
     let yPosition = 60;
     
@@ -430,14 +430,14 @@ const Index = () => {
             <div className="space-y-6 mb-12">
               <div className="flex items-center justify-center gap-3">
                 <Icon name="Mail" size={20} className="text-gold" />
-                <a href="mailto:contact@portfolio.com" className="hover:text-gold transition-colors tracking-wide">
-                  contact@portfolio.com
+                <a href="mailto:vz7ya@mail.ru" className="hover:text-gold transition-colors tracking-wide">
+                  vz7ya@mail.ru
                 </a>
               </div>
               <div className="flex items-center justify-center gap-3">
                 <Icon name="Phone" size={20} className="text-gold" />
-                <a href="tel:+1234567890" className="hover:text-gold transition-colors tracking-wide">
-                  +1 (234) 567-890
+                <a href="tel:+79095865637" className="hover:text-gold transition-colors tracking-wide">
+                  +7 (909) 586-56-37
                 </a>
               </div>
             </div>
