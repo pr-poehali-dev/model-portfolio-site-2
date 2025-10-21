@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
-type Category = 'All' | 'Fashion' | 'Beauty' | 'Commercial' | 'Editorial';
+type Category = 'All' | 'Tests' | 'Portrait' | 'Runway' | 'Studio' | 'Commercial' | 'Other';
 
 interface PortfolioImage {
   id: number;
@@ -15,14 +15,14 @@ const portfolioImages: PortfolioImage[] = [
   {
     id: 1,
     url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg',
-    category: 'Fashion',
-    title: 'High Fashion Editorial'
+    category: 'Tests',
+    title: 'Model Test Shoot'
   },
   {
     id: 2,
     url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/7fff6723-a4f1-4732-9231-a66cff73da58.jpg',
-    category: 'Beauty',
-    title: 'Beauty Campaign'
+    category: 'Portrait',
+    title: 'Portrait Session'
   },
   {
     id: 3,
@@ -33,20 +33,20 @@ const portfolioImages: PortfolioImage[] = [
   {
     id: 4,
     url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg',
-    category: 'Editorial',
-    title: 'Magazine Cover'
+    category: 'Runway',
+    title: 'Fashion Week'
   },
   {
     id: 5,
     url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/7fff6723-a4f1-4732-9231-a66cff73da58.jpg',
-    category: 'Fashion',
-    title: 'Runway Collection'
+    category: 'Studio',
+    title: 'Studio Session'
   },
   {
     id: 6,
     url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/51a43506-9a3a-4278-acdf-9d92a448b09c.jpg',
-    category: 'Commercial',
-    title: 'Brand Ambassador'
+    category: 'Other',
+    title: 'Creative Concept'
   }
 ];
 
@@ -79,7 +79,20 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
-  const categories: Category[] = ['All', 'Fashion', 'Beauty', 'Commercial', 'Editorial'];
+  const categories: Category[] = ['All', 'Tests', 'Portrait', 'Runway', 'Studio', 'Commercial', 'Other'];
+
+  const getCategoryLabel = (category: Category): string => {
+    const labels: Record<Category, string> = {
+      All: 'Все',
+      Tests: 'Тесты',
+      Portrait: 'Портрет',
+      Runway: 'Подиум',
+      Studio: 'Студия',
+      Commercial: 'Реклама',
+      Other: 'Другое'
+    };
+    return labels[category];
+  };
 
   const filteredImages = activeCategory === 'All' 
     ? portfolioImages 
@@ -212,7 +225,7 @@ const Index = () => {
                     : 'bg-white text-black hover:bg-gray-100'
                 }`}
               >
-                {category === 'All' ? 'Все' : category}
+                {getCategoryLabel(category)}
               </button>
             ))}
           </div>
