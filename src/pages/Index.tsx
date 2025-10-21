@@ -57,6 +57,8 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,6 +109,15 @@ const Index = () => {
 
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormData({ name: '', email: '', message: '' });
+      setFormSubmitted(false);
+    }, 3000);
   };
 
   return (
@@ -289,6 +300,59 @@ const Index = () => {
             <p className="text-gray-400 mb-12 leading-relaxed">
               Открыта для новых проектов и сотрудничества. Давайте создадим что-то прекрасное вместе.
             </p>
+
+            {formSubmitted ? (
+              <div className="mb-12 p-8 bg-gold/10 border border-gold animate-fade-in">
+                <Icon name="CheckCircle" size={48} className="text-gold mx-auto mb-4" />
+                <p className="text-gold text-lg tracking-wide">Спасибо! Ваше сообщение отправлено.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="mb-12 text-left max-w-lg mx-auto">
+                <div className="mb-6">
+                  <label className="block text-sm tracking-widest uppercase text-gray-400 mb-2">
+                    Имя
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className="block text-sm tracking-widest uppercase text-gray-400 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className="block text-sm tracking-widest uppercase text-gray-400 mb-2">
+                    Сообщение
+                  </label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-gold text-black px-8 py-4 text-sm tracking-widest uppercase hover:bg-gold/90 transition-all duration-300 font-medium"
+                >
+                  Отправить сообщение
+                </button>
+              </form>
+            )}
+
             <div className="space-y-6 mb-12">
               <div className="flex items-center justify-center gap-3">
                 <Icon name="Mail" size={20} className="text-gold" />
