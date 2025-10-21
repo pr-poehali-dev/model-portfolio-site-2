@@ -253,11 +253,11 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-serif text-7xl md:text-8xl mb-6 tracking-tight">
-              Elegance
+              Жанна Карпова
             </h2>
             <div className="w-24 h-px bg-gold mx-auto mb-6"></div>
             <p className="text-xl text-gray-600 tracking-wide mb-12">
-              Professional Model & Fashion Artist
+              Профессиональная модель
             </p>
             <Button
               onClick={() => scrollToSection('portfolio')}
@@ -342,26 +342,20 @@ const Index = () => {
               <div className={`transition-all duration-700 delay-300 ${
                 visibleSections.has('about') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`}>
-                <h2 className="font-serif text-5xl mb-6">Обо мне</h2>
+                <h2 className="font-serif text-5xl mb-6">Жанна Карпова</h2>
                 <div className="w-16 h-px bg-gold mb-8"></div>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  Профессиональная модель с опытом работы в высокой моде, рекламных кампаниях и редакционных съемках.
-                </p>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  Сотрудничаю с ведущими фотографами и брендами, создавая визуальные истории, которые вдохновляют и оставляют след в мире моды.
-                </p>
                 <div className="space-y-4 mt-8">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-gold"></div>
-                    <p className="text-sm tracking-wide">Опыт: 5+ лет</p>
+                    <p className="text-sm tracking-wide">Возраст: 44 года</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-gold"></div>
-                    <p className="text-sm tracking-wide">Специализация: Fashion, Editorial, Commercial</p>
+                    <p className="text-sm tracking-wide">Рост: 178 см</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-gold"></div>
-                    <p className="text-sm tracking-wide">Сотрудничество с международными брендами</p>
+                    <p className="text-sm tracking-wide">Параметры: 104/80/104</p>
                   </div>
                 </div>
               </div>
