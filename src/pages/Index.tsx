@@ -16,37 +16,37 @@ interface PortfolioImage {
 const portfolioImages: PortfolioImage[] = [
   {
     id: 1,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg',
-    category: 'Tests',
-    title: 'Model Test Shoot'
-  },
-  {
-    id: 2,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/7fff6723-a4f1-4732-9231-a66cff73da58.jpg',
+    url: 'https://sun9-34.userapi.com/s/v1/ig2/QttRHbyO99VWdF8zoz4BEfGKdnvhYqEX-2QrujN3fmA7touKy6_4LZjdtRrqatzEgOKkeunqXSnZSPZ18vO-BPEv.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,1080x1620,1280x1920,1440x2160,1707x2560&from=bu&u=ZO1N0gm7WYb9x-xO63vsyZpwy0S_uwpNucF6qh8nSoc&cs=1707x0',
     category: 'Portrait',
     title: 'Portrait Session'
   },
   {
+    id: 2,
+    url: 'https://sun9-64.userapi.com/s/v1/if2/ebMYN3CitM4-sj8HVTijOwL6iC3yxAFCAf_ycVHSfJ2PtLvEtEWlMzme250knHHZ7eVdhlS9GyDGEtcaIshiQXnb.jpg?quality=95&as=32x26,48x38,72x58,108x86,160x128,240x192,360x288,480x384,540x432,640x512,720x576,1080x864,1280x1024,1440x1152,2560x2048&from=bu&cs=2560x0',
+    category: 'Studio',
+    title: 'Studio Session'
+  },
+  {
     id: 3,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/51a43506-9a3a-4278-acdf-9d92a448b09c.jpg',
-    category: 'Commercial',
-    title: 'Lifestyle Brand'
+    url: 'https://sun9-29.userapi.com/s/v1/ig2/g0fTJTTonh3bz0ixm5ktFLoMBrGhj5Mfn3jYocW7uESPulCxKPzSR0Tzh-Nc5pvddCIgjagMGm0qule_asDchhxA.jpg?quality=95&as=32x42,48x63,72x94,108x141,160x208,240x313,360x469,480x625,540x704,640x834,720x938,1080x1407,1280x1668,1440x1876,1650x2150&from=bu&cs=1650x0',
+    category: 'Tests',
+    title: 'Model Test Shoot'
   },
   {
     id: 4,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg',
+    url: 'https://sun9-34.userapi.com/s/v1/ig2/QttRHbyO99VWdF8zoz4BEfGKdnvhYqEX-2QrujN3fmA7touKy6_4LZjdtRrqatzEgOKkeunqXSnZSPZ18vO-BPEv.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,1080x1620,1280x1920,1440x2160,1707x2560&from=bu&u=ZO1N0gm7WYb9x-xO63vsyZpwy0S_uwpNucF6qh8nSoc&cs=1707x0',
     category: 'Runway',
     title: 'Fashion Week'
   },
   {
     id: 5,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/7fff6723-a4f1-4732-9231-a66cff73da58.jpg',
-    category: 'Studio',
-    title: 'Studio Session'
+    url: 'https://sun9-64.userapi.com/s/v1/if2/ebMYN3CitM4-sj8HVTijOwL6iC3yxAFCAf_ycVHSfJ2PtLvEtEWlMzme250knHHZ7eVdhlS9GyDGEtcaIshiQXnb.jpg?quality=95&as=32x26,48x38,72x58,108x86,160x128,240x192,360x288,480x384,540x432,640x512,720x576,1080x864,1280x1024,1440x1152,2560x2048&from=bu&cs=2560x0',
+    category: 'Commercial',
+    title: 'Lifestyle Brand'
   },
   {
     id: 6,
-    url: 'https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/51a43506-9a3a-4278-acdf-9d92a448b09c.jpg',
+    url: 'https://sun9-29.userapi.com/s/v1/ig2/g0fTJTTonh3bz0ixm5ktFLoMBrGhj5Mfn3jYocW7uESPulCxKPzSR0Tzh-Nc5pvddCIgjagMGm0qule_asDchhxA.jpg?quality=95&as=32x42,48x63,72x94,108x141,160x208,240x313,360x469,480x625,540x704,640x834,720x938,1080x1407,1280x1668,1440x1876,1650x2150&from=bu&cs=1650x0',
     category: 'Other',
     title: 'Creative Concept'
   }
@@ -333,7 +333,7 @@ const Index = () => {
               }`}>
                 <div className="aspect-[3/4] overflow-hidden bg-gray-100">
                   <img
-                    src="https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg"
+                    src="https://sun9-34.userapi.com/s/v1/ig2/QttRHbyO99VWdF8zoz4BEfGKdnvhYqEX-2QrujN3fmA7touKy6_4LZjdtRrqatzEgOKkeunqXSnZSPZ18vO-BPEv.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,1080x1620,1280x1920,1440x2160,1707x2560&from=bu&u=ZO1N0gm7WYb9x-xO63vsyZpwy0S_uwpNucF6qh8nSoc&cs=1707x0"
                     alt="About"
                     className="w-full h-full object-cover"
                   />
