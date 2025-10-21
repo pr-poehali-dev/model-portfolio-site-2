@@ -443,22 +443,12 @@ const Index = () => {
             </div>
             <div className="flex gap-6 justify-center">
               <a
-                href="#"
+                href="https://vk.com/zhannakarpova"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 border border-white/30 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all duration-300"
               >
-                <Icon name="Instagram" size={20} />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 border border-white/30 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all duration-300"
-              >
-                <Icon name="Facebook" size={20} />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 border border-white/30 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all duration-300"
-              >
-                <Icon name="Twitter" size={20} />
+                <Icon name="Share2" size={20} />
               </a>
             </div>
           </div>
