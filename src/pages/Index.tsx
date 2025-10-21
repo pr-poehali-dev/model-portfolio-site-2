@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -55,6 +55,27 @@ const Index = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set(prev).add(entry.target.id));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('[data-animate]').forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const categories: Category[] = ['All', 'Fashion', 'Beauty', 'Commercial', 'Editorial'];
 
@@ -64,6 +85,7 @@ const Index = () => {
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
+    setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -93,7 +115,8 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <h1 className="font-serif text-2xl tracking-wider">PORTFOLIO</h1>
-            <div className="flex gap-8">
+            
+            <div className="hidden md:flex gap-8">
               {['home', 'portfolio', 'about', 'contact'].map((section) => (
                 <button
                   key={section}
@@ -106,11 +129,36 @@ const Index = () => {
                 </button>
               ))}
             </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-black hover:text-gold transition-colors"
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+            </button>
           </div>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 animate-fade-in">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              {['home', 'portfolio', 'about', 'contact'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className={`text-sm tracking-widest uppercase transition-all duration-300 hover:text-gold text-left ${
+                    activeSection === section ? 'text-gold' : 'text-black'
+                  }`}
+                >
+                  {section === 'home' ? 'Главная' : section === 'portfolio' ? 'Портфолио' : section === 'about' ? 'Обо мне' : 'Контакты'}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 animate-fade-in">
+      <section id="home" className="min-h-screen flex items-center justify-center pt-20 animate-fade-in" data-animate>
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-serif text-7xl md:text-8xl mb-6 tracking-tight">
@@ -131,14 +179,18 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="portfolio" className="min-h-screen py-24 bg-gray-50">
+      <section id="portfolio" className="min-h-screen py-24 bg-gray-50" data-animate>
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className={`text-center mb-16 transition-all duration-700 ${
+            visibleSections.has('portfolio') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
             <h2 className="font-serif text-5xl md:text-6xl mb-4">Портфолио</h2>
             <div className="w-24 h-px bg-gold mx-auto"></div>
           </div>
 
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
+          <div className={`flex justify-center gap-4 mb-12 flex-wrap transition-all duration-700 delay-200 ${
+            visibleSections.has('portfolio') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
             {categories.map((category) => (
               <button
                 key={category}
@@ -181,11 +233,13 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="about" className="min-h-screen flex items-center py-24">
+      <section id="about" className="min-h-screen flex items-center py-24" data-animate>
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="animate-fade-in">
+              <div className={`transition-all duration-700 ${
+                visibleSections.has('about') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}>
                 <div className="aspect-[3/4] overflow-hidden bg-gray-100">
                   <img
                     src="https://cdn.poehali.dev/projects/8b2aab55-eb63-44c9-b11f-63060693552e/files/335ab86e-f4ae-40b9-a955-94bf1a96380b.jpg"
@@ -194,7 +248,9 @@ const Index = () => {
                   />
                 </div>
               </div>
-              <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className={`transition-all duration-700 delay-300 ${
+                visibleSections.has('about') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}>
                 <h2 className="font-serif text-5xl mb-6">Обо мне</h2>
                 <div className="w-16 h-px bg-gold mb-8"></div>
                 <p className="text-gray-700 leading-relaxed mb-6">
@@ -223,9 +279,11 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="contact" className="min-h-screen flex items-center py-24 bg-black text-white">
+      <section id="contact" className="min-h-screen flex items-center py-24 bg-black text-white" data-animate>
         <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center animate-fade-in">
+          <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
+            visibleSections.has('contact') ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}>
             <h2 className="font-serif text-5xl md:text-6xl mb-6">Свяжитесь со мной</h2>
             <div className="w-24 h-px bg-gold mx-auto mb-12"></div>
             <p className="text-gray-400 mb-12 leading-relaxed">
