@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 type Category = 'All' | 'Tests' | 'Portrait' | 'Runway' | 'Studio' | 'Commercial' | 'Other';
 
@@ -133,12 +135,77 @@ const Index = () => {
     }, 3000);
   };
 
+  const downloadPDF = async () => {
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(24);
+    pdf.text('MODEL PORTFOLIO', pageWidth / 2, 20, { align: 'center' });
+    
+    pdf.setFontSize(12);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Professional Model & Fashion Artist', pageWidth / 2, 30, { align: 'center' });
+    
+    pdf.setFontSize(10);
+    pdf.text('Email: contact@portfolio.com', pageWidth / 2, 40, { align: 'center' });
+    pdf.text('Phone: +1 (234) 567-890', pageWidth / 2, 45, { align: 'center' });
+    
+    let yPosition = 60;
+    
+    for (let i = 0; i < Math.min(6, portfolioImages.length); i++) {
+      if (i > 0 && i % 2 === 0) {
+        pdf.addPage();
+        yPosition = 20;
+      }
+      
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = portfolioImages[i].url;
+        });
+        
+        const imgWidth = pageWidth - 40;
+        const imgHeight = (img.height * imgWidth) / img.width;
+        const maxHeight = 100;
+        const finalHeight = Math.min(imgHeight, maxHeight);
+        const finalWidth = (img.width * finalHeight) / img.height;
+        
+        pdf.addImage(img, 'JPEG', (pageWidth - finalWidth) / 2, yPosition, finalWidth, finalHeight);
+        
+        pdf.setFontSize(10);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(portfolioImages[i].title, pageWidth / 2, yPosition + finalHeight + 5, { align: 'center' });
+        pdf.setFont('helvetica', 'normal');
+        pdf.text(portfolioImages[i].category, pageWidth / 2, yPosition + finalHeight + 10, { align: 'center' });
+        
+        yPosition += finalHeight + 20;
+      } catch (error) {
+        console.error('Error loading image:', error);
+      }
+    }
+    
+    pdf.save('portfolio.pdf');
+  };
+
   return (
     <div className="min-h-screen bg-white text-black">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <h1 className="font-serif text-2xl tracking-wider">PORTFOLIO</h1>
+            
+            <button
+              onClick={downloadPDF}
+              className="hidden md:flex items-center gap-2 px-4 py-2 text-sm tracking-widest uppercase border border-black hover:bg-black hover:text-white transition-all duration-300"
+            >
+              <Icon name="Download" size={16} />
+              PDF
+            </button>
             
             <div className="hidden md:flex gap-8">
               {['home', 'portfolio', 'about', 'contact'].map((section) => (
